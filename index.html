@@ -1,59 +1,74 @@
 <!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeitgerüst"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#EDF0F3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0E1721" media="(prefers-color-scheme: dark)"><meta name="format-detection" content="telephone=no"><link rel="apple-touch-icon" href="apple-touch-icon.png"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style><title>Zeitgerüst</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 /* Layout: eine schmale Lesespalte (max. 640px).
    Startseite = senkrechter Zeitstrahl mit Epochen, Einheit = Lesetext + Quiz. */
 :root{
-  --font-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-  --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --bg:#EDF0F3;
-  --surface:#F8FAFB;
-  --fg:#14202E;
-  --muted:#55657A;
-  --line:#CCD5DE;
-  --accent:#0E6E6B;
+  --font-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --font-body:Charter,"Iowan Old Style","Bitstream Charter",Georgia,"Times New Roman",serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --bg:#EFE6D0;
+  --surface:#F8F1DF;
+  --fg:#262A30;
+  --muted:#554F3D;
+  --line:#CFC2A2;
+  --accent:#134230;
   --accent-ink:#FFFFFF;
-  --mark:#9A5B00;
-  --good:#1E7A46;
-  --good-bg:#E1F2E8;
-  --bad:#B3342B;
-  --bad-bg:#F8E4E1;
+  --mark:#A23E2B;
+  --good:#2F7A45;
+  --good-bg:#E3EFD9;
+  --bad:#A8342B;
+  --bad-bg:#F5DFD6;
+  --sea:#D6E2D2;
+  --land:#E8D9B0;
+  --coast:#8C7B52;
+  --grat:rgba(60,90,70,.22);
+  --halo:rgba(248,241,223,.92);
+  --pgrid:rgba(110,95,60,.08);
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0E1721;
-    --surface:#152230;
-    --fg:#E4EBF2;
-    --muted:#9AACBF;
-    --line:#28394B;
-    --accent:#5CC8BD;
-    --accent-ink:#07201E;
-    --mark:#E3A94B;
-    --good:#5BC98A;
-    --good-bg:#12301F;
-    --bad:#F08A80;
-    --bad-bg:#3A1C1A;
+    --bg:#07120D;
+    --surface:#0D1E16;
+    --fg:#F1EBD8;
+    --muted:#B9B49F;
+    --line:#25392E;
+    --accent:#8FD6AA;
+    --accent-ink:#04110A;
+    --mark:#E8956A;
+    --good:#6FCB8E;
+    --good-bg:#14301F;
+    --bad:#F08E80;
+    --bad-bg:#3A1D1A;
+    --sea:#0A1B13;
+    --land:#1F3228;
+    --coast:#6F8D78;
+    --grat:rgba(140,200,165,.16);
+    --halo:rgba(7,18,13,.88);
+  --pgrid:rgba(140,200,165,.05);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E1721;
-  --surface:#152230;
-  --fg:#E4EBF2;
-  --muted:#9AACBF;
-  --line:#28394B;
-  --accent:#5CC8BD;
-  --accent-ink:#07201E;
-  --mark:#E3A94B;
-  --good:#5BC98A;
-  --good-bg:#12301F;
-  --bad:#F08A80;
-  --bad-bg:#3A1C1A;
+  --bg:#07120D;
+  --surface:#0D1E16;
+  --fg:#F1EBD8;
+  --muted:#B9B49F;
+  --line:#25392E;
+  --accent:#8FD6AA;
+  --accent-ink:#04110A;
+  --mark:#E8956A;
+  --good:#6FCB8E;
+  --good-bg:#14301F;
+  --bad:#F08E80;
+  --bad-bg:#3A1D1A;
+  --sea:#0A1B13;
+  --land:#1F3228;
+  --coast:#6F8D78;
+  --grat:rgba(140,200,165,.16);
+  --halo:rgba(7,18,13,.88);
+  --pgrid:rgba(140,200,165,.05);
   color-scheme:dark;
 }
 
@@ -70,6 +85,9 @@ body{
   line-height:1.6;
   padding-block:20px 120px;
   overscroll-behavior-x:none;
+  background-image:linear-gradient(var(--pgrid) 1px,transparent 1px),linear-gradient(90deg,var(--pgrid) 1px,transparent 1px);
+  background-size:56px 56px;
+  background-position:-1px -1px;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px));
 }
@@ -93,16 +111,16 @@ button{font:inherit;color:inherit}
 .today p{font-size:16px;min-width:0}
 
 .spine{list-style:none;margin:28px 0 0;padding:0 0 0 28px;position:relative}
-.spine::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}
+.spine::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:0;border-left:2px dashed var(--coast)}
 .node{position:relative;margin:0 0 14px}
 .node::before{
-  content:"";position:absolute;left:-28px;top:22px;width:16px;height:16px;border-radius:50%;
-  background:var(--bg);border:2px solid var(--line);
+  content:"";position:absolute;left:-27px;top:24px;width:14px;height:14px;border-radius:3px;transform:rotate(45deg);
+  background:var(--bg);border:2px solid var(--coast);
 }
 .node.ready::before{border-color:var(--accent);background:var(--bg)}
 .node.done::before{border-color:var(--accent);background:var(--accent)}
 
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card{background:var(--surface);border:1px solid var(--coast);border-radius:6px;padding:16px 18px;box-shadow:inset 0 0 0 3px var(--surface),inset 0 0 0 4px var(--line)}
 .card.planned{background:transparent;border-style:dashed}
 .card.planned h2,.card.planned .blurb{color:var(--muted)}
 .years{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--mark)}
@@ -184,9 +202,10 @@ details p{margin-top:10px;font-size:17px;line-height:1.6}
 
 /* iPhone: Daumenzone unten, Lesefortschritt oben, Chips zum Springen */
 .sect{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 14px)}
-.chips{display:flex;gap:8px;overflow-x:auto;margin-top:16px;padding-bottom:6px;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;scroll-snap-align:start;min-height:42px;padding:0 15px;border:1px solid var(--line);border-radius:21px;background:var(--surface);color:var(--fg);font-family:var(--font-display);font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer}
+.chips{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.chips-h{margin:0 0 -2px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{display:flex;align-items:baseline;gap:12px;width:100%;text-align:left;min-height:48px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font-family:var(--font-display);font-size:16px;font-weight:600;line-height:1.3;cursor:pointer}
+.chip .cn{flex:none;font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--mark);min-width:1.6em}
 .swhint{margin-top:10px;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
 .dock{
   position:fixed;left:0;right:0;bottom:0;z-index:20;
@@ -208,6 +227,49 @@ details p{margin-top:10px;font-size:17px;line-height:1.6}
 .dbtn.pri small{color:var(--accent-ink);opacity:.8}
 .dbtn:disabled{opacity:.38;cursor:default}
 .prog{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:0;background:var(--accent);z-index:30;pointer-events:none}
+
+/* Kartenlook: Ozean, Land, Schalter, Kompass */
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.head>div{min-width:0}
+.dial{flex:none;width:112px;height:112px}
+.dial .ring{fill:none;stroke:var(--grat);stroke-width:1}
+.dial .seg{fill:none;stroke:var(--line);stroke-width:9}
+.dial .seg.on{stroke:var(--accent)}
+.dial .star{fill:var(--line)}
+.dial .nn{font-family:var(--font-mono);font-size:7px;fill:var(--mark);font-weight:500}
+.dial .cnt{font-family:var(--font-display);font-weight:700;font-size:17px;fill:var(--fg)}
+.dial .cap{font-family:var(--font-mono);font-size:6.5px;fill:var(--muted);letter-spacing:.06em}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:none;border:0;padding:6px 0;min-height:46px;cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--fg);text-align:left}
+.sw .trk{width:52px;height:32px;border-radius:16px;background:var(--line);position:relative;flex:none}
+.sw .trk::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.sw[aria-checked="true"] .trk{background:var(--accent)}
+.sw[aria-checked="true"] .trk::after{transform:translateX(20px)}
+@media (prefers-reduced-motion:no-preference){
+  .sw .trk{transition:background .2s ease}
+  .sw .trk::after{transition:transform .2s ease}
+}
+.readrow{margin-top:18px;padding:2px 16px;border:1px solid var(--coast);border-radius:8px;background:var(--surface)}
+.filter{padding:2px 0;border-bottom:1px solid var(--line)}
+.urow-wrap{display:flex;gap:8px;align-items:stretch}
+.urow-wrap .urow{flex:1;min-width:0}
+.rchk{flex:none;width:50px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--line);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.rchk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.urow.is-read .ut{color:var(--muted)}
+.allread{font-family:var(--font-mono);font-size:12px;color:var(--good);margin-top:12px}
+.map{margin:22px 0 0;border:2px solid var(--coast);border-radius:4px;background:var(--sea);overflow:hidden;box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--coast)}
+.mapsvg{display:block;width:100%;height:auto}
+.mapsvg .grat{fill:none;stroke:var(--grat);stroke-width:1;vector-effect:non-scaling-stroke}
+.mapsvg .land{fill:var(--land);stroke:var(--coast);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.mapsvg .lake{fill:var(--sea);stroke:var(--coast);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.mapsvg .mk{fill:var(--mark);stroke:var(--halo);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.mapsvg .mlab{font-family:var(--font-display);font-weight:700;fill:var(--fg);paint-order:stroke;stroke:var(--halo);stroke-linejoin:round}
+.mapsvg .glab{font-family:var(--font-mono);fill:var(--muted)}
+.mapsvg .rose{fill:var(--coast);opacity:.85}
+.mapsvg .rosen{font-family:var(--font-display);font-weight:700;fill:var(--mark)}
+.mapcap{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface);border-top:2px solid var(--coast)}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:calc(100% - 32px);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:20px;font-family:var(--font-display);font-weight:600;font-size:14px;z-index:40;opacity:0;pointer-events:none;text-align:center}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:no-preference){.toast{transition:opacity .25s ease}}
 </style>
 
 <div id="app" class="app"></div>
@@ -1494,6 +1556,10 @@ UNITS.u15 = {
   ]
 };
 
+var WORLD_D="M-9.5 -37L-8.9 -37L-9.5 -38.7L-8.8 -41.9L-9.3 -43L-1.8 -43.4L-1.2 -46L-4.5 -48.4L-1.5 -48.7L0.2 -49.7L1.6 -50.9L3.5 -51.4L4.6 -52.9L8.5 -53.7L8.6 -55.5L8.2 -57.1L10.6 -57.7L10.5 -56L9.9 -54.8L11 -54L14.2 -54L19 -54.4L21 -55.3L21 -57L24 -57.1L24.4 -59.4L28 -59.5L30 -60L28.5 -60.5L23 -59.9L21.4 -60.8L21.5 -63L25 -65L24.5 -65.8L22 -65.7L21.3 -64.5L17.5 -62.5L17.2 -61L18.8 -60L17.5 -58.8L16.5 -57L16 -56.2L14.3 -55.5L12.9 -55.4L12.8 -56.4L11.9 -57.7L11 -59.2L10.6 -59.9L8 -58.1L5.5 -58.8L5.1 -60.5L5 -62L7.5 -63L10 -64L12.5 -66L15 -68.2L18 -69.6L23 -70.9L28 -71.1L31 -70.2L33 -69.4L36 -69L41 -67.5L40.5 -66L37 -64.5L40.5 -64.5L44 -66L44 -68.5L54 -68.8L60 -69.5L68 -68.5L69 -73L76 -72.5L80 -73.5L87 -75L100 -77L104 -77.7L113 -75.8L113 -73.5L128 -72.5L130 -71L140 -72.5L150 -71.5L160 -69.7L170 -70L180 -68.9L180 -65.5L179 -62.5L172 -60L164 -60L163 -56L160.5 -53L156.7 -50.9L156 -53L155.5 -57L160 -61.5L150 -59.5L142 -59L137 -54L141 -53L140 -48L138 -46L135 -43.5L131 -42.5L129.5 -41L129.2 -37L129.4 -35.1L126.5 -34.5L126.6 -37.8L125 -39.5L121.6 -39L121.5 -40.8L118 -39.2L118.8 -37.5L122.5 -37.3L120 -36L119.3 -34.8L121.9 -31.5L121.9 -30.8L122 -29.8L120.5 -27L118 -24.5L113.8 -22.3L110.5 -21L108.5 -21.6L106.8 -20.6L105.8 -19L108.6 -15.5L109.2 -12L106.5 -9.5L105 -8.6L104.8 -10.5L103 -11.4L100.9 -13.4L99.2 -10L100.5 -7.5L102 -6L103.5 -4.3L103.5 -1.4L101.3 -2.8L100.4 -5.5L98.3 -8L98.5 -11L97.7 -16.5L94.5 -16L94.2 -19.5L92 -21.5L91.5 -22.5L90 -22L88.5 -21.5L86.5 -20L85 -19.5L82.5 -16.5L80.2 -15.5L80 -13L79.8 -10.5L78.2 -8.9L77.5 -8L76.3 -9.5L75 -12.5L73.8 -15.4L72.8 -19L72.9 -21L70.5 -20.8L69 -22.3L70.5 -23L68.2 -23.6L66.5 -25.4L62 -25.2L58 -25.6L56.5 -27L54 -26.8L51 -28L50.2 -30L48.5 -30L48 -29.5L48.5 -28L50.2 -26.3L51.5 -24.6L54 -24.2L56.3 -26L57 -24L58.6 -23.6L59.8 -22.4L58.6 -20.6L55.5 -17.5L52 -16L48 -14L45 -12.8L43.4 -12.7L42.8 -15L42.5 -17L41 -19.5L39.2 -21.8L38.5 -24.5L36.5 -26L35 -28L34.9 -29.5L34.3 -31.3L35 -33L35.9 -35.5L36 -36.6L34 -36.2L32 -36.2L30.5 -36.8L28 -36.7L27.2 -37.3L26.3 -38.5L26.7 -40L26 -40.9L24 -40.8L23.6 -39.9L22.8 -40.5L22.9 -39.5L23.6 -38L24 -37.7L23 -36.5L22.4 -36.5L21.7 -37L21.1 -38.2L20.3 -39.3L19.4 -40.3L19.5 -41.7L18.5 -42.5L16 -43.5L14.5 -45L13.7 -45.6L12.3 -45.2L12.4 -44.3L13.6 -43.6L14.2 -42.2L16 -41.9L18.5 -40.2L17.2 -40.5L16.6 -39.7L17.1 -38.9L16.1 -38L15.6 -38L15.8 -38.7L15.6 -40L14.9 -40.2L14 -40.8L12.6 -41.5L11.1 -42.4L10.3 -43.8L8.8 -44.4L7.5 -43.8L6 -43.1L4.5 -43.4L3.1 -43L3.1 -42.2L0.8 -41L0.1 -39.5L-0.5 -38.2L-1.8 -36.9L-4.5 -36.7L-5.6 -36L-6.3 -36.7L-7 -37.2ZM32.3 -31.3L34.3 -31.3L34.9 -29.5L33.5 -28L32.6 -29.9ZM32.5 -31.2L30 -31.2L29 -30.9L25 -31.7L23 -32.7L20 -32.2L19.5 -30.5L17 -31L15.3 -32.4L11 -33.2L10.3 -34.7L10.5 -36.9L9.8 -37.3L8 -36.9L5 -36.8L2.5 -36.6L-1 -35.7L-2 -35.1L-5 -35.9L-5.9 -35.8L-6.8 -34L-9.5 -32.5L-9.7 -30.5L-10.2 -29L-12.8 -27.5L-14.5 -26.1L-16 -23.7L-17 -21L-16.5 -19.2L-16.3 -16.5L-17.5 -14.7L-16.7 -13.4L-15 -11.5L-13.3 -9L-11.5 -7.1L-8 -4.4L-4 -5.1L-1.8 -4.8L1 -6L3 -6.4L5 -5.6L6.8 -4.4L8.5 -4.6L9.7 -3.5L9.4 -2L9.8 0L8.8 0.7L10.3 3.5L12 5.8L13.3 9L13.4 12.2L12 17L11.8 18L14.5 22.5L15 27L16.5 28.6L18.3 32L18.4 34.3L20 34.8L22.5 34L26 33.7L28 32.5L30 31L32.8 28L32.9 26L35.4 24L35.4 21.5L34.9 19.8L36 18L39 16L40.5 14.5L40.5 11L39.2 8L39.3 5L41 2L43 -0.5L46 -2.5L48 -5L50 -8.5L51.3 -11.8L49 -11.4L44 -10.5L43.2 -11.5L41.8 -14.5L39.5 -15.4L38.5 -18L37.2 -21L35.5 -24.2L34 -26.5L33 -28.5L32.5 -30ZM-168 -65.7L-162 -70.3L-156 -71.3L-141 -69.7L-130 -70L-120 -69L-110 -68L-100 -68L-95 -71L-92 -69L-85 -69.5L-82 -67L-87 -64L-94 -61L-93 -58.7L-88 -56.5L-82.3 -55.2L-82 -52.9L-79.5 -51.3L-79 -54.7L-77.5 -58L-78 -62L-73 -62L-69 -60.5L-65 -60.5L-64.5 -58.5L-61.5 -56.5L-58 -54L-55.5 -52.2L-56 -51.5L-59 -50.2L-66 -50.2L-70 -47.5L-64.5 -48.8L-64.5 -46.5L-61 -45.7L-66 -43.7L-67 -44.8L-70 -43.7L-70.5 -41.8L-74 -40.5L-75.5 -38.5L-76 -37L-75.5 -35.3L-77.5 -34.2L-79 -33.5L-81 -31.5L-81.3 -30L-80.3 -27L-80.1 -25.7L-81.2 -25.2L-82.2 -26.6L-82.8 -28.5L-84 -30L-85.3 -29.6L-86.5 -30.4L-88.5 -30.3L-89.5 -29.2L-90.8 -29.1L-92 -29.6L-94 -29.5L-95.5 -28.8L-97.2 -27L-97.5 -25L-97.8 -22L-96.3 -19L-94.5 -18.2L-92 -18.6L-90.6 -19.8L-90.3 -21L-87 -21.5L-87.5 -19.5L-88.2 -17L-88.8 -15.8L-85.5 -15.9L-83.2 -15L-83.5 -12.5L-83.7 -10.8L-82.5 -9.5L-79.5 -9.5L-77.4 -8.6L-77.9 -7.2L-78.2 -7.5L-80 -7.3L-81.7 -8.2L-83.5 -8.5L-85.7 -10L-87.3 -12.9L-90 -13.8L-92.5 -14.6L-94.5 -16L-96 -15.7L-99 -16.8L-102 -18L-105.5 -20L-105.4 -22.4L-108.3 -25.5L-111 -27.9L-113 -31L-114.7 -31.7L-114.7 -30L-112.9 -27.8L-110.3 -24L-109.5 -23L-110.5 -23.5L-112.5 -25L-114.2 -27.8L-115.5 -29.5L-117 -32.5L-118.5 -34L-120.6 -34.6L-122.5 -37.5L-123.8 -39.5L-124.4 -42L-124 -46.2L-124.7 -48.4L-125 -50L-128 -51.3L-130 -54.5L-132 -56.5L-135.5 -58.5L-139 -59.8L-144 -60L-148 -60.4L-151 -59.2L-153.5 -57.8L-157 -56.5L-162 -55L-164.5 -54.5L-163 -57.5L-161.5 -58.7L-162.5 -60L-165.5 -61.5L-165 -63L-161 -64.5L-166 -64.7ZM-77.4 -8.6L-76 -9.3L-75.5 -10.7L-73 -11.3L-71.5 -12.4L-71.3 -11L-70 -12.1L-68 -10.6L-64 -10.5L-62 -10.7L-60.5 -8.5L-58 -6.8L-55 -5.8L-52 -5L-50 -1.8L-50.3 0L-48 1L-44.5 2.5L-40 2.8L-37 5L-34.9 7.5L-35.5 9.5L-37.5 12L-39 14L-39.2 17.8L-40.5 20.5L-41.9 22.7L-44 23.2L-46.5 24L-48.6 26.5L-48.7 28.5L-51 31L-52.2 32.6L-54 34.8L-56 34.7L-57.8 34.3L-58.5 34.2L-57 36.5L-57.5 38.2L-62 39L-62.3 40.7L-65 41L-64.2 42.5L-65.3 44.8L-67.5 46.5L-66 47.8L-68.5 50.2L-69 52L-68.4 53.2L-66.5 55L-68 55.5L-71 54.8L-74 52.5L-75.5 48.5L-73.8 44L-73.5 41L-73.7 37L-72.8 35L-71.6 33L-71.5 30L-70.8 26L-70.3 22L-70.3 18.4L-73 16.4L-76.2 13.7L-78.6 10L-80.5 6.5L-81.2 4.5L-80 2.5L-80.8 0.8L-80 -1.5L-78.7 -2L-77.5 -4L-77.3 -6L-77.9 -7.2ZM-73 -78L-60 -82L-30 -83.5L-18 -81.5L-20 -77L-19 -74L-22 -70.5L-25 -68.5L-32 -68L-40 -65L-42 -60.5L-44 -60L-48 -61L-52 -64L-54 -67L-54 -70L-56 -72L-60 -76L-68 -76.5ZM-24 -65.5L-22 -66.4L-16 -66.5L-13.5 -65L-18.5 -63.4L-22.5 -63.8ZM-5.7 -50.1L-3 -50.7L1.3 -51.1L1.7 -52.6L0.3 -53.5L-1.5 -55L-2 -56L-3 -57.7L-5 -58.6L-6.3 -57.5L-5.5 -56L-4.8 -55L-3 -54.7L-3 -53.4L-4.6 -52.8L-5.2 -51.7L-3 -51.3L-4.5 -50.4ZM-10 -51.8L-6 -52.2L-6 -54.2L-5.5 -55.2L-7.5 -55.3L-10 -54.2ZM52 -71L57 -70.7L68 -76.5L60 -76.2ZM142 -46L143.5 -49L143 -54L142 -53.5ZM130.9 -34L133 -34.5L135 -34.7L136.8 -34.3L139 -34.7L140.9 -35.7L141.5 -38.5L141.9 -40.5L140.3 -41L139.9 -39.5L139 -38L137 -37L136 -36L133 -35.5L131 -34.5ZM140 -41.5L141.5 -42.5L145.5 -43.3L143.2 -44.5L141.7 -45.4L141.5 -43.5L140 -42.5ZM129.7 -33L131.5 -33.8L131.8 -32L131 -31L130.2 -31.3ZM120.1 -23L121.5 -25.2L122 -24.5L120.9 -22ZM80 -9.8L81.8 -7.5L80.5 -6L79.8 -8ZM95.3 -5.5L98.5 -4.3L103.8 -1L106 3L105.8 5.8L102 4L98.5 -0.5ZM105.2 6.8L108.5 6.6L111 6.5L114.5 7.7L114.4 8.7L108 7.8ZM109 -1.7L111 -1.9L113 -3.2L116 -6.8L119 -5.3L117.5 -1.5L116.5 1.5L116 3.6L113 3.2L110.3 2.9L109.1 1ZM119.8 -0.6L125 -1.4L121 -0.3L123 0.8L121.5 2.8L122.5 4.8L120.3 5.6L119.5 3ZM131 0.8L134 0.8L138 1.7L141 2.7L145 4.5L147.5 6L147.8 8L150.5 10.5L147 10L143.8 9L141 9.1L138 8.4L137.8 5L134.5 4L132.5 3ZM120.5 -18.5L122.3 -18.4L122 -16.5L121.7 -14L124 -13L122 -13.6L120.6 -14.2L119.9 -16ZM122 -7L125.5 -9.7L126.5 -7.5L126 -6.5L124 -6.8ZM113.5 22L114.2 26L115 30L115 34L117.8 35L122 34L124 33.5L129 31.7L132 32L135.5 34.8L137.5 33L138 35.5L140 37.8L144 38.3L146.2 39L149.5 37.5L151 34L153 30L153.5 27L152.5 24.8L150 22.2L146.5 19L145.4 15L143.5 14L142.5 10.7L141.5 13L141.7 16L140.5 17.6L136.8 15.8L135.5 14.8L136.8 12.2L132.5 11.5L130.5 12.5L129.5 15L127 14L125 15L122.2 17.5L121 19.7L118.5 20.4L116 21ZM144.7 40.7L148.3 41L148 43L146 43.6L145 42ZM172.7 34.5L174.5 36.5L177 37.7L178.5 37.7L176.5 39.5L175.2 41.5L173.8 39.5L174.8 37ZM172.7 40.5L174.2 41.8L173 43.5L171 44.8L169 46.6L166.5 46L168 44L171.5 41.6ZM49.3 12L50.4 15.5L49.5 18L47.3 25L45 25.5L43.5 23L44 20L44.4 16.2L47 15ZM-85 -21.9L-83 -23L-81 -23.2L-78 -22.5L-74.2 -20.2L-77 -19.9L-79.5 -21.5L-84 -21.8ZM-74.4 -19.8L-72 -19.9L-68.4 -18.6L-70 -18.2L-71.7 -17.8L-74.4 -18.4Z";
+var LAKES_D="M28 -41.2L31 -41.1L35 -42L38 -41L41.5 -41.5L41.6 -42.5L40 -43.4L37.5 -44.8L36.6 -45.3L35 -45L33.5 -44.4L32.5 -45.4L33 -46L31 -46.6L30.8 -46L29.7 -45.2L28.7 -44L28 -42.5ZM47 -45L49 -46.5L53 -45L51 -44.5L52.5 -42L53 -40.5L54 -37.5L50.5 -37L49 -38.5L49.5 -40.3L48 -42L47.5 -43.5Z";
+var GEO={"u1": {"b": [-125, -45, 160, 62], "m": [["Mesopotamien", 45, 32, "b"], ["Ägypten", 31, 27, "l"], ["Indus", 68, 27, "b"], ["Gelber Fluss", 112, 35, "b"], ["Griechenland", 23, 39, "t"], ["Rom", 12.5, 42, "l"], ["Maya", -90, 17, "t"], ["Anden", -72, -13, "r"]]}, "u2": {"b": [18, 10, 102, 46], "m": [["Uruk", 45.6, 31.3, "b"], ["Babylon", 44.4, 32.5, "l"], ["Ninive", 43.1, 36.4, "t"], ["Memphis", 31.2, 29.9, "t"], ["Theben", 32.7, 25.7, "b"], ["Knossos", 25.2, 35.3, "b"], ["Hattusa", 34.6, 40, "t"], ["Mohenjo-Daro", 68.1, 27.3, "b"], ["Harappa", 72.9, 30.6, "t"]]}, "u3": {"b": [12, 24, 58, 46], "m": [["Athen", 23.7, 38, "b"], ["Sparta", 22.4, 37.1, "l"], ["Delphi", 22.5, 38.5, "l"], ["Troja", 26.2, 40, "t"], ["Milet", 27.3, 37.5, "r"], ["Syrakus", 15.3, 37.1, "b"], ["Susa", 48.2, 32.2, "t"], ["Persepolis", 52.9, 29.9, "b"]]}, "u4": {"b": [8, 8, 82, 48], "m": [["Pella", 22.5, 40.8, "t"], ["Granikos", 27.3, 40.2, "r"], ["Issos", 36.2, 36.9, "t"], ["Alexandria", 29.9, 31.2, "b"], ["Gaugamela", 43.3, 36.5, "t"], ["Babylon", 44.4, 32.5, "b"], ["Persepolis", 52.9, 29.9, "b"], ["Samarkand", 67, 39.7, "t"], ["Hyphasis", 75.2, 31.6, "b"]]}, "u5": {"b": [-12, 29, 36, 50], "m": [["Rom", 12.5, 41.9, "t"], ["Cannae", 16.1, 41.3, "r"], ["Karthago", 10.3, 36.9, "b"], ["Pharsalos", 22.4, 39.3, "r"], ["Actium", 20.7, 38.9, "b"], ["Alesia", 4.5, 47.5, "t"], ["Numantia", -2.4, 41.8, "b"], ["Korinth", 22.9, 37.9, "b"]]}, "u6": {"b": [-12, 26, 46, 58], "m": [["Rom", 12.5, 41.9, "b"], ["Alexandria", 29.9, 31.2, "t"], ["Antiochia", 36.2, 36.2, "r"], ["Londinium", -0.1, 51.5, "b"], ["Colonia", 6.9, 50.9, "t"], ["Trier", 6.6, 49.7, "b"], ["Byzantion", 29, 41, "t"], ["Jerusalem", 35.2, 31.8, "b"], ["Karthago", 10.3, 36.9, "b"], ["Dakien", 23.3, 45.6, "t"]]}, "u7": {"b": [-12, 28, 52, 56], "m": [["Rom", 12.5, 41.9, "b"], ["Konstantinopel", 29, 41, "t"], ["Mailand", 9.2, 45.5, "t"], ["Trier", 6.6, 49.7, "t"], ["Ravenna", 12.2, 44.4, "r"], ["Adrianopel", 26.5, 41.7, "l"], ["Karthago", 10.3, 36.9, "b"], ["York", -1.1, 54, "t"], ["Alexandria", 29.9, 31.2, "b"], ["Antiochia", 36.2, 36.2, "r"]]}, "u8": {"b": [-10, 36, 28, 58], "m": [["Tours", 0.7, 47.4, "b"], ["Aachen", 6.1, 50.8, "t"], ["Lorsch", 8.6, 49.6, "r"], ["Verdun", 5.4, 49.2, "l"], ["Lindisfarne", -1.8, 55.7, "r"], ["Ravenna", 12.2, 44.4, "r"], ["Rom", 12.5, 41.9, "r"], ["Monte Cassino", 13.8, 41.5, "b"], ["Lechfeld", 10.9, 48.4, "b"]]}, "u9": {"b": [10, 28, 62, 58], "m": [["Konstantinopel", 29, 41, "l"], ["Kiew", 30.5, 50.5, "t"], ["Nowgorod", 31.3, 58.5, "r"], ["Thessaloniki", 22.9, 40.6, "l"], ["Manzikert", 42.5, 39.2, "b"], ["Trapezunt", 39.7, 41, "t"], ["Antiochia", 36.2, 36.2, "b"], ["Jerusalem", 35.2, 31.8, "r"]]}, "u10": {"b": [-12, 8, 76, 46], "m": [["Mekka", 39.8, 21.4, "b"], ["Medina", 39.6, 24.5, "t"], ["Damaskus", 36.3, 33.5, "t"], ["Bagdad", 44.4, 33.3, "r"], ["Kairo", 31.2, 30, "l"], ["Córdoba", -4.8, 37.9, "b"], ["Toledo", -4, 39.9, "t"], ["Kairouan", 10.1, 35.7, "b"], ["Buchara", 64.4, 39.8, "t"], ["Tours", 0.5, 46.8, "t"]]}, "u11": {"b": [-12, 38, 32, 62], "m": [["Köln", 7, 50.9, "t"], ["Paris", 2.3, 48.9, "l"], ["Lübeck", 10.7, 53.9, "t"], ["Bologna", 11.3, 44.5, "t"], ["Salerno", 14.8, 40.7, "r"], ["Oxford", -1.3, 51.8, "l"], ["Prag", 14.4, 50.1, "r"], ["Danzig", 18.7, 54.4, "t"], ["Bergen", 5.3, 60.4, "r"], ["Venedig", 12.3, 45.4, "r"]]}, "u12": {"b": [-8, 25, 52, 56], "m": [["Clermont", 3.1, 45.8, "l"], ["Canossa", 10.5, 44.6, "b"], ["Worms", 8.4, 49.6, "t"], ["Runnymede", -0.6, 51.4, "l"], ["Rom", 12.5, 41.9, "b"], ["Konstantinopel", 29, 41, "t"], ["Edessa", 38.8, 37.2, "r"], ["Akkon", 35.1, 32.9, "t"], ["Jerusalem", 35.2, 31.8, "r"], ["Kairo", 31.2, 30, "l"]]}, "u13": {"b": [-12, 30, 46, 58], "m": [["Paris", 2.3, 48.9, "l"], ["Azincourt", 2.1, 50.5, "t"], ["Orléans", 1.9, 47.9, "b"], ["Mainz", 8.3, 50, "t"], ["Konstanz", 9.2, 47.7, "r"], ["Avignon", 4.8, 43.9, "b"], ["Kaffa", 35.4, 45, "t"], ["Messina", 15.6, 38.2, "b"], ["Konstantinopel", 29, 41, "b"], ["Florenz", 11.3, 43.8, "r"], ["Amselfeld", 21.1, 42.7, "r"]]}, "u14": {"b": [58, 4, 152, 58], "m": [["Chang'an", 108.9, 34.3, "b"], ["Peking", 116.4, 39.9, "t"], ["Kaifeng", 114.3, 34.8, "r"], ["Nanjing", 118.8, 32.1, "b"], ["Karakorum", 102.8, 47.2, "t"], ["Dunhuang", 94.7, 40.1, "t"], ["Kaschgar", 76, 39.5, "t"], ["Samarkand", 67, 39.7, "t"], ["Delhi", 77.2, 28.6, "b"], ["Kyoto", 135.8, 35, "b"], ["Angkor", 103.9, 13.4, "b"]]}, "u15": {"b": [-112, -36, 56, 42], "m": [["Cahokia", -90.1, 38.7, "t"], ["Tenochtitlan", -99.1, 19.4, "l"], ["Tikal", -89.6, 17.2, "b"], ["Cusco", -72, -13.5, "r"], ["Timbuktu", -3, 16.8, "t"], ["Benin", 5.6, 6.3, "b"], ["Meroë", 33.7, 16.9, "t"], ["Aksum", 38.7, 14.1, "r"], ["Kilwa", 39.5, -9, "r"], ["Großsimbabwe", 30.9, -20.3, "l"]]}};
+
 
   var CHAPTERS = [
     { id: "orientierung", title: "Das große Bild", years: "ab 3000 v. Chr. – 1500", blurb: "Ein Überblick über Antike und Mittelalter als Orientierung, bevor es in die Tiefe geht.", units: ["u1"] },
@@ -1541,10 +1607,14 @@ UNITS.u15 = {
       var raw = localStorage.getItem(KEY);
       if (raw) {
         var s = JSON.parse(raw);
-        if (s && typeof s === "object") { s.done = s.done || {}; s.q = s.q || {}; return s; }
+        if (s && typeof s === "object") {
+          s.done = s.done || {}; s.q = s.q || {}; s.read = s.read || {};
+          Object.keys(s.done).forEach(function (k) { s.read[k] = true; });   /* Quiz gemacht = gelesen */
+          return s;
+        }
       }
     } catch (e) {}
-    return { done: {}, q: {} };
+    return { done: {}, q: {}, read: {} };
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
 
@@ -1666,30 +1736,143 @@ UNITS.u15 = {
     if (t) { t.setAttribute("tabindex", "-1"); try { t.focus({ preventScroll: true }); } catch (e) {} }
   }
 
+  /* ---------- Gelesen-Markierung, Schalter, Hinweis ---------- */
+  var toastEl = null, toastT = 0;
+  function toast(msg) {
+    if (!toastEl) { toastEl = h("div", { class: "toast", role: "status", "aria-live": "polite" }); document.body.append(toastEl); }
+    toastEl.textContent = msg; toastEl.classList.add("on");
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove("on"); }, 1800);
+  }
+  function isRead(u) { return !!state.read[u.id]; }
+  function markRead(u, on, announce) {
+    var was = isRead(u);
+    if (on) state.read[u.id] = true; else delete state.read[u.id];
+    save();
+    if (announce && on && !was) toast("Einheit " + u.no + " als gelesen markiert");
+  }
+  function mkSwitch(on, label, fn) {
+    var b = h("button", { class: "sw", type: "button", role: "switch", "aria-checked": on ? "true" : "false" },
+      h("span", { class: "slab" }, label), h("span", { class: "trk" }));
+    b.addEventListener("click", function () {
+      var nv = b.getAttribute("aria-checked") !== "true";
+      b.setAttribute("aria-checked", nv ? "true" : "false");
+      tick(1);
+      fn(nv, b);
+    });
+    return b;
+  }
+
+  /* ---------- Grafik: Karte, Kompassrose, Fortschrittsring ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  function sv(tag, attrs) {
+    var el = document.createElementNS(NS, tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) { if (attrs[k] != null) el.setAttribute(k, attrs[k]); });
+    for (var i = 2; i < arguments.length; i++) add(el, arguments[i]);
+    return el;
+  }
+  function roseShape(cx, cy, r) {
+    var s = r * 0.2;
+    return "M" + cx + " " + (cy - r) + "L" + (cx + s) + " " + (cy - s) + "L" + (cx + r) + " " + cy + "L" + (cx + s) + " " + (cy + s) +
+      "L" + cx + " " + (cy + r) + "L" + (cx - s) + " " + (cy + s) + "L" + (cx - r) + " " + cy + "L" + (cx - s) + " " + (cy - s) + "Z";
+  }
+  function mapFig(u) {
+    var g = GEO[u.id];
+    if (!g) return null;
+    var b = g.b, x0 = b[0], y0 = -b[3], w = b[2] - b[0], ht = b[3] - b[1], fs = w * 0.031;
+    var step = w > 150 ? 30 : w > 70 ? 10 : 5;
+    var svg = sv("svg", { viewBox: x0 + " " + y0 + " " + w + " " + ht, class: "mapsvg", role: "img",
+      "aria-label": "Karte mit den Orten: " + g.m.map(function (m) { return m[0]; }).join(", ") });
+    var d = "", k, lab = [];
+    for (k = Math.ceil(x0 / step) * step; k < x0 + w; k += step) {
+      d += "M" + k + " " + y0 + "L" + k + " " + (y0 + ht);
+      if (k > x0 + fs * 2.5) lab.push(sv("text", { x: k + fs * 0.2, y: y0 + ht - fs * 0.3, "font-size": fs * 0.6, class: "glab" }, Math.abs(k) + "° " + (k < 0 ? "W" : "O")));
+    }
+    for (k = Math.ceil(b[1] / step) * step; k < b[3]; k += step) {
+      d += "M" + x0 + " " + (-k) + "L" + (x0 + w) + " " + (-k);
+      if (-k < y0 + ht - fs * 1.8) lab.push(sv("text", { x: x0 + fs * 0.25, y: -k - fs * 0.2, "font-size": fs * 0.6, class: "glab" }, Math.abs(k) + "° " + (k < 0 ? "S" : "N")));
+    }
+    svg.append(sv("path", { d: d, class: "grat" }), sv("path", { d: WORLD_D, class: "land" }), sv("path", { d: LAKES_D, class: "lake" }));
+    lab.forEach(function (n) { svg.append(n); });
+    var rx = x0 + w - fs * 2.6, ry = y0 + fs * 3.4;
+    svg.append(sv("path", { d: roseShape(rx, ry, fs * 1.9), class: "rose" }), sv("text", { x: rx, y: ry - fs * 2.15, "font-size": fs * 0.95, "text-anchor": "middle", class: "rosen" }, "N"));
+    /* Beschriftungen automatisch platzieren: erste Position ohne Überlappung */
+    var rects = [], dots = g.m.map(function (m) { return { x: m[1] - fs * 0.35, y: -m[2] - fs * 0.35, w: fs * 0.7, h: fs * 0.7 }; });
+    function hit(a, c) { return a.x < c.x + c.w && a.x + a.w > c.x && a.y < c.y + c.h && a.y + a.h > c.y; }
+    function cand(m, a) {
+      var x = m[1], y = -m[2], wd = m[0].length * fs * 0.6, ht2 = fs * 0.95, o = fs * 0.55, r;
+      if (a === "r") r = { x: x + o, y: y - ht2 / 2, w: wd, h: ht2, tx: x + o, ty: y + fs * 0.33, an: "start" };
+      else if (a === "l") r = { x: x - o - wd, y: y - ht2 / 2, w: wd, h: ht2, tx: x - o, ty: y + fs * 0.33, an: "end" };
+      else if (a === "t") r = { x: x - wd / 2, y: y - o - ht2, w: wd, h: ht2, tx: x, ty: y - o - fs * 0.2, an: "middle" };
+      else if (a === "b") r = { x: x - wd / 2, y: y + o, w: wd, h: ht2, tx: x, ty: y + o + fs * 0.75, an: "middle" };
+      else if (a === "tr") r = { x: x + o * 0.4, y: y - o - ht2, w: wd, h: ht2, tx: x + o * 0.4, ty: y - o - fs * 0.2, an: "start" };
+      else if (a === "tl") r = { x: x - o * 0.4 - wd, y: y - o - ht2, w: wd, h: ht2, tx: x - o * 0.4, ty: y - o - fs * 0.2, an: "end" };
+      else if (a === "br") r = { x: x + o * 0.4, y: y + o, w: wd, h: ht2, tx: x + o * 0.4, ty: y + o + fs * 0.75, an: "start" };
+      else r = { x: x - o * 0.4 - wd, y: y + o, w: wd, h: ht2, tx: x - o * 0.4, ty: y + o + fs * 0.75, an: "end" };
+      return r;
+    }
+    g.m.forEach(function (m, mi) {
+      var order = [m[3] || "r", "r", "l", "t", "b", "tr", "tl", "br", "bl"], best = null, bestS = 1e9, k2, c, s, j;
+      for (k2 = 0; k2 < order.length; k2++) {
+        c = cand(m, order[k2]); s = 0;
+        if (c.x < x0 + fs * 0.2 || c.x + c.w > x0 + w - fs * 0.2 || c.y < y0 + fs * 0.2 || c.y + c.h > y0 + ht - fs * 1.1) s += 5;
+        for (j = 0; j < rects.length; j++) if (hit(c, rects[j])) s += 3;
+        for (j = 0; j < dots.length; j++) if (j !== mi && hit(c, dots[j])) s += 3;
+        if (hit(c, { x: rx - fs * 2, y: ry - fs * 2.4, w: fs * 4, h: fs * 4.6 })) s += 3;
+        if (s < bestS) { bestS = s; best = c; }
+        if (s === 0) break;
+      }
+      rects.push(best);
+      svg.append(sv("circle", { cx: m[1], cy: -m[2], r: fs * 0.3, class: "mk" }),
+        sv("text", { x: best.tx, y: best.ty, "font-size": fs, "text-anchor": best.an, class: "mlab", "stroke-width": fs * 0.32 }, m[0]));
+    });
+    return h("figure", { class: "map", style: "margin-inline:0" }, svg,
+      h("figcaption", { class: "mapcap" }, h("span", null, "Schauplätze"), h("span", null, g.m.length + " Orte")));
+  }
+  function polar(cx, cy, r, deg) { var a = deg * Math.PI / 180; return (cx + r * Math.cos(a)).toFixed(2) + " " + (cy + r * Math.sin(a)).toFixed(2); }
+  function dial(read, n) {
+    var cx = 60, cy = 60, R = 47, svg = sv("svg", { viewBox: "0 0 120 120", class: "dial", role: "img", "aria-label": read + " von " + n + " Einheiten gelesen" });
+    svg.append(sv("circle", { cx: cx, cy: cy, r: 57, class: "ring" }), sv("circle", { cx: cx, cy: cy, r: 38, class: "ring" }));
+    ALL.forEach(function (u, i) {
+      var a0 = -90 + i * 360 / n + 2, a1 = -90 + (i + 1) * 360 / n - 2;
+      svg.append(sv("path", { d: "M" + polar(cx, cy, R, a0) + "A" + R + " " + R + " 0 0 1 " + polar(cx, cy, R, a1), class: "seg" + (isRead(u) ? " on" : "") }));
+    });
+    svg.append(sv("path", { d: roseShape(cx, cy, 34), class: "star", opacity: 0.55 }),
+      sv("text", { x: cx, y: cy + 5, "text-anchor": "middle", class: "cnt" }, read + "/" + n),
+      sv("text", { x: cx, y: cy + 15, "text-anchor": "middle", class: "cap" }, "GELESEN"));
+    return svg;
+  }
+
   /* ---------- Startseite ---------- */
   function home(mode) {
     cur = { kind: "home" };
     if (mode === "replace") pushView("replace", { k: "home" });
     setProg(false);
     var due = dueItems(), pool = poolSize();
-    var read = ALL.filter(function (u) { return state.done[u.id]; }).length;
+    var read = ALL.filter(isRead).length;
     var todayText = due.length
       ? "Zur Wiederholung fällig: " + due.length + (due.length === 1 ? " Frage" : " Fragen")
       : (pool ? "Heute ist nichts zur Wiederholung fällig." : "Die Wiederholung beginnt nach deinem ersten Quiz.");
     show(h("div", { class: "wrap" },
       h("header", { class: "head" },
-        h("p", { class: "eyebrow" }, "Weltgeschichte in Einheiten à 10 Minuten"),
-        h("h1", null, "Zeitgerüst"),
-        h("p", { class: "stat" }, "Gelesen: " + read + " von " + ALL.length + (ALL.length === 1 ? " verfügbaren Einheit" : " verfügbaren Einheiten"))
+        h("div", null,
+          h("p", { class: "eyebrow" }, "Weltgeschichte in Einheiten à 10 Minuten"),
+          h("h1", null, "Zeitgerüst"),
+          h("p", { class: "stat" }, ALL.length - read + " von " + ALL.length + " Einheiten noch ungelesen")
+        ),
+        dial(read, ALL.length)
       ),
       h("section", { class: "today", "aria-label": "Wiederholung" },
         h("p", null, todayText),
         h("button", { class: "btn", type: "button", disabled: !due.length, onclick: startReview }, "Wiederholen")
       ),
+      h("div", { class: "filter" }, mkSwitch(!!state.f, "Nur ungelesene zeigen", function (on) {
+        state.f = on ? 1 : 0; save();
+        var y = window.scrollY; home("none"); try { window.scrollTo(0, y); } catch (e) {}
+      })),
       h("ol", { class: "spine" }, CHAPTERS.map(chapterNode)),
       h("p", { class: "foot" }, "Dein Fortschritt wird nur in diesem Browser auf diesem Gerät gespeichert.")
     ), 0);
-    var nxt = ALL.filter(function (u) { return !state.done[u.id]; })[0] || ALL[ALL.length - 1];
+    var nxt = ALL.filter(function (u) { return !isRead(u); })[0] || ALL[ALL.length - 1];
     setDock([
       dbtn(read ? "Weiterlesen" : "Loslegen", "Einheit " + nxt.no, function () { unitView(nxt, 1, "push"); }, ""),
       dbtn("Wiederholen", due.length ? due.length + " fällig" : "nichts fällig", startReview, "pri", !due.length)
@@ -1698,7 +1881,7 @@ UNITS.u15 = {
 
   function chapterNode(c) {
     var avail = c.units.length > 0;
-    var doneN = c.units.filter(function (u) { return state.done[u.id]; }).length;
+    var doneN = c.units.filter(isRead).length;
     var cls = "node " + (avail ? (doneN === c.units.length ? "done" : "ready") : "planned");
     var card = h("div", { class: "card" + (avail ? "" : " planned") },
       h("p", { class: "years" }, c.years),
@@ -1708,10 +1891,11 @@ UNITS.u15 = {
     if (avail) {
       var fill = h("i");
       fill.style.width = Math.round(doneN / c.units.length * 100) + "%";
-      card.append(
-        h("div", { class: "units" }, c.units.map(unitRow)),
+      add(card, [
+        h("div", { class: "units" }, c.units.filter(function (u) { return !(state.f && isRead(u)); }).map(unitRow)),
+        (state.f && doneN === c.units.length) ? h("p", { class: "allread" }, "✓ Alles gelesen") : null,
         h("div", { class: "bar", role: "img", "aria-label": doneN + " von " + c.units.length + " Einheiten abgeschlossen" }, fill)
-      );
+      ]);
     } else {
       card.append(h("p", { class: "soon" }, "Folgt"));
     }
@@ -1719,12 +1903,19 @@ UNITS.u15 = {
   }
 
   function unitRow(u) {
-    var d = state.done[u.id];
-    return h("button", { class: "urow", type: "button", onclick: function () { unitView(u, 1, "push"); } },
+    var d = state.done[u.id], rd = isRead(u);
+    var main = h("button", { class: "urow" + (rd ? " is-read" : ""), type: "button", onclick: function () { unitView(u, 1, "push"); } },
       h("span", { class: "no" }, "Einheit " + u.no),
       h("span", { class: "us" }, d ? "Quiz " + d.best + "/" + d.total : "ca. " + u.minutes + " Min."),
       h("span", { class: "ut" }, u.title)
     );
+    var chk = h("button", { class: "rchk" + (rd ? " on" : ""), type: "button", "aria-pressed": rd ? "true" : "false",
+      "aria-label": "Einheit " + u.no + (rd ? ": als ungelesen markieren" : ": als gelesen markieren"),
+      onclick: function () {
+        markRead(u, !isRead(u)); tick(1);
+        var y = window.scrollY; home("none"); try { window.scrollTo(0, y); } catch (e) {}
+      } }, "✓");
+    return h("div", { class: "urow-wrap" }, main, chk);
   }
 
   /* ---------- Einheit ---------- */
@@ -1746,13 +1937,19 @@ UNITS.u15 = {
         h("p", { class: "eyebrow" }, "Einheit " + u.no + " · " + u.chapter.title + " · ca. " + u.minutes + " Min. Lesezeit"),
         h("h1", { class: "utitle" }, u.title),
         h("p", { class: "lead" }, u.lead),
-        u.body ? h("div", { class: "chips", "aria-label": "Springe zu einem Abschnitt" }, u.body.map(function (b, i) {
-          return h("button", { class: "chip", type: "button", onclick: function () {
-            var el = document.getElementById("s-" + i);
-            if (el) { try { el.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) { el.scrollIntoView(); } }
-          } }, b.h);
-        })) : null,
-        state.sw ? null : h("p", { class: "swhint" }, "Tipp: Nach rechts wischen geht zurück zur Zeitleiste, nach links wischen zur nächsten Einheit.")
+        h("div", { class: "readrow" }, mkSwitch(isRead(u), isRead(u) ? "Gelesen" : "Nicht gelesen", function (on, btn) {
+          markRead(u, on);
+          btn.querySelector(".slab").textContent = on ? "Gelesen" : "Nicht gelesen";
+        })),
+        mapFig(u),
+        u.body ? h("nav", { class: "chips", "aria-label": "Springe zu einem Abschnitt" },
+          h("p", { class: "chips-h" }, "In dieser Einheit"),
+          u.body.map(function (b, i) {
+            return h("button", { class: "chip", type: "button", onclick: function () {
+              var el = document.getElementById("s-" + i);
+              if (el) { try { el.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) { el.scrollIntoView(); } }
+            } }, h("span", { class: "cn" }, String(i + 1)), h("span", null, b.h));
+          })) : null
       )
     ];
     (u.body || []).forEach(function (b, i) {
@@ -1775,7 +1972,7 @@ UNITS.u15 = {
     setDock([
       dbtn("‹ Zurück", prev ? "Einheit " + prev.no : "", function () { unitView(prev, -1, "replace"); }, "", !prev),
       dbtn("Zeitleiste", u.no + " / " + ALL.length, goHome, ""),
-      dbtn("Weiter ›", next ? "Einheit " + next.no : "", function () { unitView(next, 1, "replace"); }, "pri", !next)
+      dbtn("Weiter ›", next ? "Einheit " + next.no : "", function () { markRead(u, true, true); unitView(next, 1, "replace"); }, "pri", !next)
     ]);
     quizStart(box, u);
   }
@@ -1795,6 +1992,7 @@ UNITS.u15 = {
     runQuiz(box, items, function (score) {
       var prev = state.done[u.id], total = items.length;
       state.done[u.id] = { last: score, best: Math.max(score, prev ? prev.best : 0), total: total, at: Date.now() };
+      state.read[u.id] = true;
       save();
       var nxt = ALL[ALL.indexOf(u) + 1];
       box.replaceChildren(
@@ -1803,7 +2001,7 @@ UNITS.u15 = {
           ? "Alles richtig. Die Fragen kommen später noch einmal zur Wiederholung."
           : "Die falsch beantworteten Fragen kommen bald in der Wiederholung wieder."),
         h("div", { class: "row", style: "margin-top:16px" },
-          nxt ? h("button", { class: "btn", type: "button", onclick: function () { unitView(nxt, 1, "replace"); } }, "Nächste Einheit") : null,
+          nxt ? h("button", { class: "btn", type: "button", onclick: function () { markRead(u, true, true); unitView(nxt, 1, "replace"); } }, "Nächste Einheit") : null,
           h("button", { class: nxt ? "btn ghost" : "btn", type: "button", onclick: goHome }, "Zur Zeitleiste")
         ),
         nxt ? null : h("p", { class: "hint", style: "margin-top:14px" }, "Weitere Einheiten folgen.")
@@ -1895,20 +2093,9 @@ UNITS.u15 = {
     var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy, tg = sT;
     sx = null;
     if (Date.now() - st > 700 || Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 2) return;
-    if (tg && tg.closest && tg.closest(".chips")) return;
     try { if (String(window.getSelection())) return; } catch (x) {}
-    var inQuiz = tg && tg.closest && tg.closest(".quiz");
     if (cur.kind === "home") return;
-    if (dx > 0) { state.sw = 1; save(); tick(1); goHome(); return; }   /* nach rechts wischen = zurück */
-    if (inQuiz) {
-      if (advanceFn) { var f = advanceFn; advanceFn = null; f(); }
-      return;
-    }
-    if (cur.kind !== "unit") return;
-    var target = ALL[ALL.indexOf(cur.u) + 1];
-    if (!target) return;
-    state.sw = 1; save(); tick(1);
-    unitView(target, 1, "replace");
+    if (dx > 0) { tick(1); goHome(); }   /* nach rechts wischen = zurück; sonst nichts per Wisch */
   }, { passive: true });
 
   home("none");
