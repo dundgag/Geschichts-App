@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeitgerüst"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#FFF6EF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1A0B10" media="(prefers-color-scheme: dark)"><meta name="format-detection" content="telephone=no"><link rel="apple-touch-icon" href="apple-touch-icon.png"><script>if("serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style><title>Zeitgerüst</title>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeitgerüst"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#FFF6EF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1A0B10" media="(prefers-color-scheme: dark)"><meta name="format-detection" content="telephone=no"><link rel="apple-touch-icon" href="apple-touch-icon.png"><script>if("serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style><title>Zeitgerüst</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: eine schmale Lesespalte (max. 640px).
@@ -947,6 +947,17 @@ h1,h2,h3{letter-spacing:-.03em}
 :root[data-theme="dark"]{--bg:#17090E}
 :root[data-theme="dark"] .node .card{background:color-mix(in srgb,var(--cc) 7%,var(--surface))}
 :root[data-theme="dark"] .trow{background:color-mix(in srgb,var(--cc) 8%,var(--surface))}
+
+/* Runde 5: Leiste näher am unteren Rand, App füllt den Bildschirm bis oben */
+:root{--dockb:max(8px,calc(env(safe-area-inset-bottom,0px) - 22px))}
+.dock{padding-bottom:var(--dockb)!important}
+.toast{bottom:calc(78px + var(--dockb))}
+.mini{bottom:calc(74px + var(--dockb))}
+@media (display-mode:standalone){
+  html{background:var(--bg)}
+  body{padding-top:calc(20px + env(safe-area-inset-top,0px))}
+  body::before{content:"";position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top,0px);background:#3A0F1A;z-index:28;pointer-events:none}
+}
 /* ===== Schrift skaliert überall ===== */
 body{font-size:calc(18px*var(--fs,1))}
 .hint{font-size:calc(15px*var(--fs,1))}
