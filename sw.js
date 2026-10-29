@@ -1,5 +1,5 @@
-/* Zeitgerüst: Offline-Speicher. Version 113fe3045c */
-var CACHE = "zeitgeruest-113fe3045c";
+/* Zeitgerüst: Offline-Speicher. Version 6c2e0f9cb9 */
+var CACHE = "zeitgeruest-6c2e0f9cb9";
 var FILES = ["./", "index.html", "apple-touch-icon.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) {
